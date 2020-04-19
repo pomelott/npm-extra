@@ -1,0 +1,22 @@
+#! /usr/bin/env node
+const help = require('../scpt/help');
+const PkgCopy = require('../class/PkgCopy');
+const pkg = new PkgCopy();
+const {classifyPkgCmd} = require('../lib/paramHandler')
+const param = classifyPkgCmd(process.argv);
+switch (param.cmdParam) {
+    case 'config':
+        pkg.config(param);
+        break;
+    case 'init':
+        pkg.init(param);
+        break;
+    case 'install':
+        pkg.install(param);
+        break;
+    case 'uninstall':
+        pkg.uninstall(param);
+        break;
+    default:
+        pkg.help(param);
+}
