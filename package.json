@@ -1,25 +1,26 @@
 {
   "name": "package-copy",
-  "version": "0.0.13",
+  "version": "0.1.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pkg-copy": "./bin/pkg-copy"
+    "pkg-copy": "./bin/pkg-copy",
+    "test": "node test.js"
   },
   "bin": {
     "pkg-copy": "./bin/pkg-copy"
   },
   "author": "pomelott",
   "license": "ISC",
-  "devDependencies": {},
   "dependencies": {
     "fs-extra": "^9.0.0",
-    "pomelo-toolbox": "^1.0.32"
+    "pomelo-toolbox": "^1.1.2"
   },
   "keywords": [
     "package-copy",
     "json",
     "package.json",
     "lock"
-  ]
+  ],
+  "devDependencies": {}
 }

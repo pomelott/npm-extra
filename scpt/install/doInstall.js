@@ -1,7 +1,15 @@
+/*
+ * @Author: Tate
+ * @Date: 2020-03-27 13:48:58
+ * @LastEditors: Tate
+ * @LastEditTime: 2020-06-22 18:43:35
+ * @Description: 
+ */ 
 const tbox = require('pomelo-toolbox');
 const {next} = tbox.step;
 const {exec} = tbox.cmd;
 const {Loading, logger} = require('../../lib/log');
+const {getStdApi} = require('../../lib/tools');
 const {getConf, appendPkg} = require('../../static');
 
 const installDefault = {
@@ -16,19 +24,18 @@ module.exports = (name, version, param = '', opt) => {
     let load = new Loading(`installing package ${name}@${version}...`)
     return next(async (resolve) => {
         let stdInstall = await exec(`${getConf('baseSys')} install ${param} ${name}@${version}`);
-        if (!stdInstall.err && stdInstall.stdout) {
-            let finalVersion;
-            if (stdInstall.stderr) {
+        let stdApi = getStdApi(getConf('baseSys'), stdInstall), finalVersion;
+        finalVersion = stdApi.version || version;
+        if (stdApi.status !== 'err') {
+            if (stdApi.status === 'warn') {
                 load.warn(`installed package ${name}@${version} finished with warn!`);
                 load.stop()
-                logger.log(stdInstall.stderr, 4);
-                logger.log(stdInstall.stdout, 3);
+                logger.warn(stdInstall.stderr);
+                logger.finish(stdInstall.stdout);
             } else {
                 load.succeed(`installed package ${name}@${version} finished !`);
-                logger.log(stdInstall.stdout, 3);
+                logger.finish(stdInstall.stdout);
             }
-            
-            finalVersion = stdInstall.stdout.match(/(?<=@)(\d+\.\d+\.\d+)/g)[0];
             if (opt.writeJson && param.match(/(--save)|(-D)/g)) {
                 let temp = {};
                 temp[name] = finalVersion;
@@ -46,9 +53,9 @@ module.exports = (name, version, param = '', opt) => {
             })
         } else {
             load.fail(`installing package ${name}@${version} failed, please use pkg-copy install name@version to retry!`);
-            stdInstall.stdout && logger.log(stdInstall.stdout, 5);
-            stdInstall.stderr && logger.log(stdInstall.stderr, 5);
-            stdInstall.syserr && logger.log(stdInstall.syserr, 5);
+            stdInstall.stdout && logger.error(stdInstall.stdout);
+            stdInstall.stderr && logger.error(stdInstall.stderr);
+            stdInstall.syserr && logger.error(stdInstall.syserr);
             resolve({
                 finish: false,
                 ...stdInstall

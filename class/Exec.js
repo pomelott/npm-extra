@@ -1,3 +1,10 @@
+/*
+ * @Author: Tate
+ * @Date: 2020-03-29 17:50:23
+ * @LastEditors: Tate
+ * @LastEditTime: 2020-06-22 18:46:03
+ * @Description: 
+ */ 
 
 const {logger} = require('../lib/log');
 
@@ -13,7 +20,7 @@ class Init {
         if (this.parent[this.param.cmdParam]) {
             return this.parent[this.param.cmdParam](this.param)
         } else {
-            logger.log(`this.param.cmdParam doesn't exist !`, 5);
+            logger.error(`this.param.cmdParam doesn't exist !`);
             return false;
         }
         

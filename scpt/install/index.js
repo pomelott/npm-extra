@@ -1,12 +1,19 @@
+/*
+ * @Author: Tate
+ * @Date: 2020-03-26 18:49:49
+ * @LastEditors: Tate
+ * @LastEditTime: 2020-06-22 18:41:58
+ * @Description: 
+ */ 
 
 const fse = require('fs-extra');
 const tbox = require('pomelo-toolbox');
 const {logger} = require('../../lib/log')
 const doInstall = require('./doInstall');
 const {next} = tbox.step;
-module.exports = (param) => {
+module.exports = (parent, param) => {
     return next(async (resolve) => {
-        let dep = fse.readJSONSync(param.objParam.json);
+        let dep = fse.readJSONSync(parent.opt.json);
         if (!param.commonParam.length & !param.nameParam.length) {
             // install all
             let count = 0, installRes, installAllInfo = {};
@@ -16,7 +23,7 @@ module.exports = (param) => {
                     count++;
                 }
             }
-            logger.log(`${count} devDependencies installed !`, 7);
+            logger.succeed(`${count} devDependencies installed !`);
             installAllInfo.devDependencies = count
             count = 0;
             for (let key in dep.dependencies) {
@@ -25,7 +32,7 @@ module.exports = (param) => {
                     count++;
                 }
             }
-            logger.log(`${count} dependencies installed !`, 7);
+            logger.succeed(`${count} dependencies installed !`);
             installAllInfo.dependencies = count;
             resolve(installAllInfo)
         } else {
@@ -40,11 +47,11 @@ module.exports = (param) => {
                 if (installRes.finish) {
                     installTemp.push(`${moduleName}@${finalVersion}`);
                 } else {
-                    logger.log(`installing ${moduleName} with error!`, 5)
+                    logger.error(`installing ${moduleName} with error!`)
                 }
                 
             }
-            logger.log(`finish installing ${installTemp.join(' ')} !`, 7);
+            logger.succeed(`finish installing ${installTemp.join(' ')} !`);
             resolve(installTemp)
         }
     })

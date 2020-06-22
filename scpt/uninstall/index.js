@@ -1,16 +1,23 @@
+/*
+ * @Author: Tate
+ * @Date: 2020-03-29 16:25:21
+ * @LastEditors: Tate
+ * @LastEditTime: 2020-06-22 18:39:28
+ * @Description: 
+ */ 
 
 const fse = require('fs-extra');
 const {logger} = require('../../lib/log');
 const {sleep, next} = require('pomelo-toolbox').step
 const doUninstall = require('./doUninstall');
-module.exports = (param) => {
+module.exports = (parent, param) => {
     return next(async (resolve) => {
-        let dep = fse.readJSONSync(param.objParam.json);
+        let dep = fse.readJSONSync(parent.opt.json);
         if (!param.commonParam.length & !param.nameParam.length) {
             let uninstallAllInfo = {}
-            logger.log(`this will uninstall all package in ${param.objParam.json}, and i want you to know what you are doing!`, 4)
+            logger.warn(`this will uninstall all package in ${param.objParam.json}, and i want you to know what you are doing!`)
             // uninstall all
-            logger.log(`after 3s to uninstall all package!`, 4)
+            logger.warn(`after 3s to uninstall all package!`)
             await sleep(3000)
             let count = 0, uninstallRes;
             for (let key in dep.devDependencies) {
@@ -19,7 +26,7 @@ module.exports = (param) => {
                     count++;
                 }
             }
-            logger.log(`${count} devDependencies uninstalled !`, 7);
+            logger.succeed(`${count} devDependencies uninstalled !`);
             uninstallAllInfo.devDependencies = count;
             count = 0;
             for (let key in dep.dependencies) {
@@ -28,7 +35,7 @@ module.exports = (param) => {
                     count++;
                 }
             }
-            logger.log(`${count} dependencies uninstalled !`, 7);
+            logger.succeed(`${count} dependencies uninstalled !`);
             uninstallAllInfo.dependencies = count;
             resolve(uninstallAllInfo)
         } else {
@@ -41,10 +48,10 @@ module.exports = (param) => {
                 if (uninstallRes.finish) {
                     uninstallTemp.push(`${moduleName}`);
                 } else {
-                    logger.log(`uninstalling ${moduleName} with error!`, 5)
+                    logger.error(`uninstalling ${moduleName} with error!`)
                 }
             }
-            logger.log(`finish uninstalling ${uninstallTemp.join(' ')} !`, 7);
+            logger.succeed(`finish uninstalling ${uninstallTemp.join(' ')} !`);
             resolve(true)
         }
     })

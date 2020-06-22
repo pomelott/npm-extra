@@ -10,7 +10,7 @@ class Init {
 
     baseCheck () {
         if (fse.existsSync(this.parent.opt.json)) {
-            logger.log('json file is already exist !!!', 4);
+            logger.warn('json file is already exist !!!');
             return false;
         } else {
             return true;

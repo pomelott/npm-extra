@@ -2,10 +2,10 @@
  * @Author: Tate
  * @Date: 2020-03-28 21:15:20
  * @LastEditors: Tate
- * @LastEditTime: 2020-06-22 14:16:19
+ * @LastEditTime: 2020-06-22 18:46:57
  * @Description: 
  */ 
-const {getConf} = require('../static');
+const {getConf, setConf} = require('../static');
 const {classifyPkgCmd} = require('../lib/paramHandler');
 const {logger} = require('../lib/log')
 const Exec = require('./Exec')
@@ -26,23 +26,24 @@ class PkgCopy {
         }
         
         this.opt.root = process.cwd();
-        this.opt.json = path.resolve(this.opt.root, './package-ek.json') 
+        this.opt.json = path.resolve(this.opt.root, './package-ek.json');
+        setConf({
+            root: this.opt.root,
+            json: this.opt.json
+        })
         this.execCmd = null;
         this.configCmd = null;
         this.initCmd = null;
         this.installCmd = null;
         this.uninstallCmd = null;
         this.helpCmd = null;
-        console.log(this)
-        console.log(process.execPath)
-        console.log(process.cwd())
-        console.log(process.env)
+       
     }
 
     exec (cmd) {
         let cmdArr = cmd.split(' '), param;
         if (cmdArr[0] !== 'pkg-copy') {
-            logger.log(`${cmdArr[0]} doesn't exist !`, 5);
+            logger.error(`${cmdArr[0]} doesn't exist !`);
             return false;
         }
         cmdArr.unshift('node');

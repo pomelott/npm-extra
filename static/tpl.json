@@ -3,6 +3,8 @@
 	"dependencies": {},
 	"author": "pomelott",
 	"keywords": [
-		"package-copy"
+		"package-copy",
+		"package-copy.json",
+		"package.json"
 	]
 }

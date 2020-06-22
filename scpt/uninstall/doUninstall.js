@@ -1,3 +1,10 @@
+/*
+ * @Author: Tate
+ * @Date: 2020-03-29 16:25:53
+ * @LastEditors: Tate
+ * @LastEditTime: 2020-06-22 18:49:04
+ * @Description: 
+ */ 
 const tbox = require('pomelo-toolbox');
 const {next} = tbox.step;
 const {exec} = tbox.cmd;
@@ -17,11 +24,11 @@ module.exports = (name, param = '', opt) => {
             if (stdUninstall.stderr) {
                 load.warn(`uninstalled package ${name} finished with warn!`);
                 load.stop()
-                logger.log(stdUninstall.stderr, 4);
-                logger.log(stdUninstall.stdout, 3);
+                logger.warn(stdUninstall.stderr);
+                logger.finish(stdUninstall.stdout);
             } else {
                 load.succeed(`uninstalled package ${name} finished !`);
-                logger.log(stdUninstall.stdout, 3);
+                logger.finish(stdUninstall.stdout);
             }
             if (opt.writeJson && param.match(/(--save)|(-S)/g)) {
                 let temp = {};
@@ -35,9 +42,9 @@ module.exports = (name, param = '', opt) => {
             })
         } else {
             load.fail(`uninstalling package ${name} failed, please use pkg-copy uninstall "name" to retry!`);
-            stdUninstall.stdout && logger.log(stdUninstall.stdout, 5);
-            stdUninstall.stderr && logger.log(stdUninstall.stderr, 5);
-            stdUninstall.syserr && logger.log(stdUninstall.syserr, 5);
+            stdUninstall.stdout && logger.error(stdUninstall.stdout);
+            stdUninstall.stderr && logger.error(stdUninstall.stderr);
+            stdUninstall.syserr && logger.error(stdUninstall.syserr);
             resolve({
                 finish: false,
                 ...stdUninstall
