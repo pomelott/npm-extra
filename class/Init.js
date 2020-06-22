@@ -19,7 +19,7 @@ class Init {
 
     exec () {
         if (this.baseCheck()) {
-            scptInit(this.param);
+            scptInit(this.parent, this.param);
             return true;
         }
         return false;

@@ -1,10 +1,6 @@
 # package-copy (package副本)
 
-* Unstable version, which will be continuously updated in the near future
-
 * You can use this package to regenerate the specified json file and perform general operations with the specified json file. The result will be in node_modules in the root directory.
-
-* 非稳定版本，会在近期持续更新。
 
 * 你可以用此包重新生成指定的json文件，并以指定的json文件进行常规操作。结果会响应在根目录的node_modules中。
 

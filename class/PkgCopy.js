@@ -1,3 +1,10 @@
+/*
+ * @Author: Tate
+ * @Date: 2020-03-28 21:15:20
+ * @LastEditors: Tate
+ * @LastEditTime: 2020-06-22 14:16:19
+ * @Description: 
+ */ 
 const {getConf} = require('../static');
 const {classifyPkgCmd} = require('../lib/paramHandler');
 const {logger} = require('../lib/log')
@@ -7,6 +14,7 @@ const Install = require('./Install');
 const Init = require('./Init');
 const Uninstall = require('./Uninstall');
 const Help = require('./Help')
+const path = require('path');
 class PkgCopy {
     constructor (opt = {}) {
         this.opt = Object.assign({}, getConf(), opt);
@@ -17,13 +25,18 @@ class PkgCopy {
             })
         }
         
-        
+        this.opt.root = process.cwd();
+        this.opt.json = path.resolve(this.opt.root, './package-ek.json') 
         this.execCmd = null;
         this.configCmd = null;
         this.initCmd = null;
         this.installCmd = null;
         this.uninstallCmd = null;
-        this.helpCmd = null
+        this.helpCmd = null;
+        console.log(this)
+        console.log(process.execPath)
+        console.log(process.cwd())
+        console.log(process.env)
     }
 
     exec (cmd) {
