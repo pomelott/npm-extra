@@ -2,7 +2,7 @@
  * @Author: Tate
  * @Date: 2020-03-28 21:15:20
  * @LastEditors: Tate
- * @LastEditTime: 2020-06-23 10:49:49
+ * @LastEditTime: 2020-06-23 15:34:38
  * @Description: 
  */ 
 const {getConf, setConf} = require('../static');
@@ -42,7 +42,7 @@ class PkgCopy {
 
     exec (cmd) {
         let cmdArr = cmd.split(' '), param;
-        if (cmdArr[0] !== 'pkg-copy') {
+        if (!cmdArr[0].match(/pkg-copy/g)) {
             logger.error(`${cmdArr[0]} doesn't exist !`);
             return false;
         }
