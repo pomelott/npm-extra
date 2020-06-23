@@ -2,7 +2,7 @@
  * @Author: Tate
  * @Date: 2020-03-28 21:15:20
  * @LastEditors: Tate
- * @LastEditTime: 2020-06-22 18:46:57
+ * @LastEditTime: 2020-06-23 10:49:49
  * @Description: 
  */ 
 const {getConf, setConf} = require('../static');
@@ -20,7 +20,7 @@ class PkgCopy {
         this.opt = Object.assign({}, getConf(), opt);
         if (Object.keys(opt).length) {
             this.config({
-                cmParam: 'config',
+                cmdParam: 'config',
                 objParam: opt
             })
         }

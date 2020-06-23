@@ -2,14 +2,14 @@
  * @Author: Tate
  * @Date: 2020-03-28 21:00:49
  * @LastEditors: Tate
- * @LastEditTime: 2020-06-22 18:57:10
+ * @LastEditTime: 2020-06-23 10:38:15
  * @Description: 
  */ 
 const path = require('path');
 const {appendJson} = require('../../static');
 const {logger} = require('../../lib/log')
 module.exports = (self, param) => {
-    if (param.valuableParam.length === 1) {
+    if (param.valuableParam && param.valuableParam.length === 1) {
         logger.error('no config params !!');
         return false;
     } else {
