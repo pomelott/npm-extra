@@ -2,7 +2,7 @@
  * @Author: Tate
  * @Date: 2020-03-29 17:50:23
  * @LastEditors: Tate
- * @LastEditTime: 2020-06-22 18:46:03
+ * @LastEditTime: 2020-06-23 15:40:14
  * @Description: 
  */ 
 
@@ -20,7 +20,7 @@ class Init {
         if (this.parent[this.param.cmdParam]) {
             return this.parent[this.param.cmdParam](this.param)
         } else {
-            logger.error(`this.param.cmdParam doesn't exist !`);
+            logger.error(`${this.param.cmdParam} doesn't exist !`);
             return false;
         }
         
