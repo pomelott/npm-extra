@@ -5,15 +5,23 @@ const pkg = new PkgCopy();
 const {classifyPkgCmd} = require('../lib/paramHandler')
 const param = classifyPkgCmd(process.argv);
 switch (param.cmdParam) {
+    case '-v':
+    case 'v':
+    case '--version':
+    case 'version':
+        pkg.version();
+        break;
     case 'config':
         pkg.config(param);
         break;
     case 'init':
         pkg.init(param);
         break;
+    case "i":
     case 'install':
         pkg.install(param);
         break;
+    case "un":
     case 'uninstall':
         pkg.uninstall(param);
         break;

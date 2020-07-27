@@ -2,7 +2,7 @@
  * @Author: Tate
  * @Date: 2020-03-28 21:15:20
  * @LastEditors: Tate
- * @LastEditTime: 2020-06-23 15:34:38
+ * @LastEditTime: 2020-07-27 14:44:51
  * @Description: 
  */ 
 const {getConf, setConf} = require('../static');
@@ -13,7 +13,8 @@ const Config = require('./Config');
 const Install = require('./Install');
 const Init = require('./Init');
 const Uninstall = require('./Uninstall');
-const Help = require('./Help')
+const Help = require('./Help');
+const VersionClass = require('./Version');
 const path = require('path');
 class PkgCopy {
     constructor (opt = {}) {
@@ -26,7 +27,7 @@ class PkgCopy {
         }
         
         this.opt.root = process.cwd();
-        this.opt.json = path.resolve(this.opt.root, './package-ek.json');
+        this.opt.json = path.resolve(this.opt.root, './package-extra.json');
         setConf({
             root: this.opt.root,
             json: this.opt.json
@@ -37,12 +38,12 @@ class PkgCopy {
         this.installCmd = null;
         this.uninstallCmd = null;
         this.helpCmd = null;
-       
+        this.versionCmd = null;
     }
 
     exec (cmd) {
         let cmdArr = cmd.split(' '), param;
-        if (!cmdArr[0].match(/pkg-copy/g)) {
+        if (!cmdArr[0].match(/npme/g)) {
             logger.error(`${cmdArr[0]} doesn't exist !`);
             return false;
         }
@@ -51,6 +52,10 @@ class PkgCopy {
         
         this.execCmd = new Exec(this, param);
         return this.execCmd.exec()
+    }
+    version (param) {
+        this.versionCmd = new VersionClass(this, param);
+        return this.versionCmd.exec() 
     }
 
     config (param) {

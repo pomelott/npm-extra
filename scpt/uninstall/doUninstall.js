@@ -2,7 +2,7 @@
  * @Author: Tate
  * @Date: 2020-03-29 16:25:53
  * @LastEditors: Tate
- * @LastEditTime: 2020-06-22 18:49:04
+ * @LastEditTime: 2020-07-27 14:42:42
  * @Description: 
  */ 
 const tbox = require('pomelo-toolbox');
@@ -41,7 +41,7 @@ module.exports = (name, param = '', opt) => {
                 ...stdUninstall
             })
         } else {
-            load.fail(`uninstalling package ${name} failed, please use pkg-copy uninstall "name" to retry!`);
+            load.fail(`uninstalling package ${name} failed, please use <npme uninstall "name"> to retry!`);
             stdUninstall.stdout && logger.error(stdUninstall.stdout);
             stdUninstall.stderr && logger.error(stdUninstall.stderr);
             stdUninstall.syserr && logger.error(stdUninstall.syserr);

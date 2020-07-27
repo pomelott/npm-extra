@@ -1,14 +1,14 @@
 {
-  "name": "package-copy",
-  "version": "0.1.5",
-  "description": "",
+  "name": "npm-extra-extension",
+  "version": "1.0.0",
+  "description": "Npm's useful function extension.",
   "main": "index.js",
   "scripts": {
-    "pkg-copy": "./bin/pkg-copy",
+    "npme": "./bin/npme",
     "test": "node test.js"
   },
   "bin": {
-    "pkg-copy": "./bin/pkg-copy"
+    "npme": "./bin/npme"
   },
   "author": "pomelott",
   "license": "ISC",
@@ -17,10 +17,14 @@
     "pomelo-toolbox": "^1.1.2"
   },
   "keywords": [
-    "package-copy",
+    "pomelott",
+    "npm-extra",
+    "npm-extra-extension",
+    "npme",
     "json",
-    "package.json",
-    "lock"
+    "package-extra.json",
+    "lock",
+    "npm-extension"
   ],
   "devDependencies": {}
 }

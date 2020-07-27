@@ -3,8 +3,11 @@
 	"dependencies": {},
 	"author": "pomelott",
 	"keywords": [
-		"package-copy",
-		"package-copy.json",
-		"package.json"
+		"pomelott",
+		"npme",
+		"npm-extra",
+		"package-extra.json",
+		"package.json",
+		"lock"
 	]
 }

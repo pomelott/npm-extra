@@ -2,7 +2,7 @@
  * @Author: Tate
  * @Date: 2020-03-27 13:48:58
  * @LastEditors: Tate
- * @LastEditTime: 2020-06-22 18:43:35
+ * @LastEditTime: 2020-07-27 15:01:40
  * @Description: 
  */ 
 const tbox = require('pomelo-toolbox');
@@ -52,7 +52,7 @@ module.exports = (name, version, param = '', opt) => {
                 ...stdInstall
             })
         } else {
-            load.fail(`installing package ${name}@${version} failed, please use pkg-copy install name@version to retry!`);
+            load.fail(`installing package ${name}@${version} failed, please use npme install name@version to retry!`);
             stdInstall.stdout && logger.error(stdInstall.stdout);
             stdInstall.stderr && logger.error(stdInstall.stderr);
             stdInstall.syserr && logger.error(stdInstall.syserr);
