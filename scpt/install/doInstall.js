@@ -2,7 +2,7 @@
  * @Author: Tate
  * @Date: 2020-03-27 13:48:58
  * @LastEditors: Tate
- * @LastEditTime: 2020-07-27 15:01:40
+ * @LastEditTime: 2020-07-28 12:09:27
  * @Description: 
  */ 
 const tbox = require('pomelo-toolbox');
@@ -36,7 +36,7 @@ module.exports = (name, version, param = '', opt) => {
                 load.succeed(`installed package ${name}@${version} finished !`);
                 logger.finish(stdInstall.stdout);
             }
-            if (opt.writeJson && param.match(/(--save)|(-D)/g)) {
+            if (opt.writeJson && param.match(/(--save)|(-D)|(-S)/g)) {
                 let temp = {};
                 temp[name] = finalVersion;
                 if (param.match(/(-dev)|(-D)/g)) {
