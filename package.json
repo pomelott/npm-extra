@@ -1,6 +1,6 @@
 {
   "name": "npm-extra-extension",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Npm's useful function extension.",
   "main": "index.js",
   "scripts": {
@@ -11,20 +11,18 @@
     "npme": "./bin/npme"
   },
   "author": "pomelott",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
+    "commander": "^6.0.0",
     "fs-extra": "^9.0.0",
-    "pomelo-toolbox": "^1.1.2"
+    "pomelo-toolbox": "^1.2.2"
   },
   "keywords": [
-    "pomelott",
-    "npm-extra",
     "npm-extra-extension",
+    "pomelott",
     "npme",
-    "json",
     "package-extra.json",
-    "lock",
-    "npm-extension"
+    "lock"
   ],
   "devDependencies": {}
 }

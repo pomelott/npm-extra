@@ -3,11 +3,10 @@
 	"dependencies": {},
 	"author": "pomelott",
 	"keywords": [
-		"pomelott",
+		"npm-extra-extension",
 		"npme",
-		"npm-extra",
+		"pomelott",
 		"package-extra.json",
-		"package.json",
-		"lock"
+		"package.json"
 	]
 }

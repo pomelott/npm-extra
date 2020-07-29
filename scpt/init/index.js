@@ -2,17 +2,15 @@
  * @Author: Tate
  * @Date: 2020-03-26 17:30:45
  * @LastEditors: Tate
- * @LastEditTime: 2020-06-22 18:44:19
+ * @LastEditTime: 2020-07-28 16:53:29
  * @Description: 
  */ 
 const path = require('path');
 const fse = require('fs-extra');
-const {appendJson, getConf} = require('../../static')
-const {filterDir} = require('../../lib/dir');
-const {logger} = require('../../lib/log')
+const {logger} = require('../../lib/log');
+const {jsonFile} = require('../../static')
 module.exports = (parent, param) => {
     const resPath = path.resolve(__dirname, '../../static/tpl.json');
-    const targetPath = parent.opt.json;
-    fse.copySync(resPath, targetPath);
-    logger.succeed(`init finished at ${targetPath} !`)
+    fse.copySync(resPath, jsonFile);
+    logger.succeed(`init finished at ${jsonFile} !`)
 }

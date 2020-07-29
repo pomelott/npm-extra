@@ -1,7 +1,7 @@
 const scptInit = require('../scpt/init');
 const fse = require('fs-extra');
 const {logger} = require('../lib/log');
-
+const {jsonFile} = require('../static')
 class Init {
     constructor (parent, param) {
         this.parent = parent;
@@ -9,7 +9,7 @@ class Init {
     }
 
     baseCheck () {
-        if (fse.existsSync(this.parent.opt.json)) {
+        if (fse.existsSync(jsonFile)) {
             logger.warn('json file is already exist !!!');
             return false;
         } else {

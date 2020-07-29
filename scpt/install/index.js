@@ -2,7 +2,7 @@
  * @Author: Tate
  * @Date: 2020-03-26 18:49:49
  * @LastEditors: Tate
- * @LastEditTime: 2020-06-22 18:41:58
+ * @LastEditTime: 2020-07-29 17:24:49
  * @Description: 
  */ 
 
@@ -10,11 +10,12 @@ const fse = require('fs-extra');
 const tbox = require('pomelo-toolbox');
 const {logger} = require('../../lib/log')
 const doInstall = require('./doInstall');
+const {jsonFile} = require('../../static')
 const {next} = tbox.step;
 module.exports = (parent, param) => {
     return next(async (resolve) => {
-        let dep = fse.readJSONSync(parent.opt.json);
-        if (!param.commonParam.length & !param.nameParam.length) {
+        let dep = fse.readJSONSync(jsonFile);
+        if (!param.options.length & !param.args.length) {
             // install all
             let count = 0, installRes, installAllInfo = {};
             for (let key in dep.devDependencies) {
@@ -38,11 +39,11 @@ module.exports = (parent, param) => {
         } else {
             // install single pkg
             let installTemp = [], installRes, moduleName, moduleVersion, finalVersion;
-            for (let i = 0; i < param.nameParam.length; i++) {
-                let item = param.nameParam[i];
+            for (let i = 0; i < param.args.length; i++) {
+                let item = param.args[i];
                 moduleName = item.split('@')[0];
                 moduleVersion = item.split('@')[1];
-                installRes = await doInstall(moduleName, moduleVersion, param.commonParam.join(' '));
+                installRes = await doInstall(moduleName, moduleVersion, param.options.join(' '));
                 finalVersion = installRes.finalVersion;
                 if (installRes.finish) {
                     installTemp.push(`${moduleName}@${finalVersion}`);
@@ -51,7 +52,7 @@ module.exports = (parent, param) => {
                 }
                 
             }
-            logger.succeed(`finish installing ${installTemp.join(' ')} !`);
+            logger.finish(`finish installing ${installTemp.join(' ')} !`);
             resolve(installTemp)
         }
     })

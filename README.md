@@ -1,65 +1,88 @@
-# npm-extra
-npm-extra is used to generate additional dependency information files. It is very convenient to split business dependencies in front-end engineering.
-
+# npm-extra-extension
+* npm-extra-extension is used to generate additional dependency information files. It is very convenient to split business dependencies in front-end engineering.
+* npm-extra-extension 用于生成额外的包依赖文件（默认为package-extra.json），能够与 package.json 区别管理，能够很方便的在工程化中对依赖做拆分。
+* for detail : [https://github.com/pomelott/npm-extra](https://github.com/pomelott/npm-extra)
+* Continue to increase and expand, please star ☆ and encourage： [https://github.com/pomelott/npm-extra](https://github.com/pomelott/npm-extra)
 
 ## Description
-The `package-extra.json` file is generated in the root directory by default. You can also use it with private libraries such as verdaccio.
+The package-extra.json file is generated in the root directory by default. You can also use it with private libraries such as verdaccio.
 
-## Install Npm-extra-extension
-
+## Install npm-extra-extension
 
 ```
 npm install -g npm-extra-extension
 ```
 
-## Fast Use
+## Fast use
 
-* Get Help
+### Get help
 
 ```
 npme
 ```
-
-* View version
+### Get subCommand
 
 ```
-npme -v
+npme install --help
 ```
 
-* Init package-extra.json
+### View version
+
+```
+npme -V
+npme --version
+```
+
+### init package-extra.json
 
 ```
 npme init
 ```
 
-* Install
-    1. install all dependences according to package-extra.json.
+### Install dependence
 
-    ```
-        npme install
-        npme i
-    ```
-    1. install specific dependence
-    notice: this has the same usage as npm
+* Install all dependences accroding to package-extra.json.
 
-    ```
-        npme install -S vue
-        npme install --save vue
-        npme i -S vue
-        npme install -D webpack
-        npme install --save-dev webpack
-    ```
+```
+    npme install
+    npme i
+```
+* Install specific dependence
 
-* Uninstall
-    1. uninstall all dependences
+notice: this has the same param as npm
 
-    ```
-        npme uninstall
-        npme un
-    ```
-    2. uninstall specific dependence
-    
-    ```
-        npme uninstall --save vue
-        npme un --save vue
-    ```
+```
+    npme install vue
+    npme i vue
+    npme install -D webpack
+    npme install --save-dev webpack
+```
+
+### Uninstall dependence
+
+* Uninstall all
+
+ ```
+     npme uninstall
+     npme un
+ ```
+
+* Uninstall specific dependence
+ 
+ ```
+     npme uninstall vue
+     npme un --no-save vue
+ ```
+### Config
+* confg base cmd, has been set to yarn by default.
+
+```
+    npme config -b yarn
+    npme config -b npm
+```
+* config dependence filename
+
+```
+    npme config -f package-extra.json
+    npme config --file package-extra.json
+```
