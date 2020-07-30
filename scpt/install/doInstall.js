@@ -2,7 +2,7 @@
  * @Author: Tate
  * @Date: 2020-03-27 13:48:58
  * @LastEditors: Tate
- * @LastEditTime: 2020-07-29 20:39:38
+ * @LastEditTime: 2020-07-30 15:09:00
  * @Description: 
  */ 
 const tbox = require('pomelo-toolbox');
@@ -42,7 +42,7 @@ module.exports = (name, version, param = '', opt) => {
             if (opt.writeJson && !param.match(/(--no-save)/g)) {
                 let temp = {};
                 temp[name] = finalVersion;
-                if (param.match(/(-dev)/g)) {
+                if (param.match(/(-dev)|(-D)/g)) {
                     
                     appendPkg('devDep', jsonFile, temp)
                 } else {
