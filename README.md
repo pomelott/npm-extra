@@ -1,11 +1,11 @@
 # npm-extra-extension
+* [🇨🇳中文文档 | 中国雄起](https://github.com/pomelott/npm-extra/CHINESE.md)
 * npm-extra-extension is used to generate additional dependency information files. It is very convenient to split business dependencies in front-end engineering.
-* npm-extra-extension 用于生成额外的包依赖文件（默认为package-extra.json），能够与 package.json 区别管理，能够很方便的在工程化中对依赖做拆分。
-* for detail : [https://github.com/pomelott/npm-extra](https://github.com/pomelott/npm-extra)
-* Continue to increase and expand, please star ☆ and encourage： [https://github.com/pomelott/npm-extra](https://github.com/pomelott/npm-extra)
+* Continue to increase and expand, please give star ☆ and encourage.
 
 ## Description
-The package-extra.json file is generated in the root directory by default. You can also use it with private libraries such as verdaccio.
+* The package-extra.json file is generated in the root directory by default. You can also use it with private libraries such as verdaccio.
+* It is very convenient when it is necessary to distinguish between the development environment dependency and business dependency of engineering scaffolding.
 
 ## Install npm-extra-extension
 

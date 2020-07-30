@@ -2,7 +2,7 @@
  * @Author: Tate
  * @Date: 2020-03-26 18:49:49
  * @LastEditors: Tate
- * @LastEditTime: 2020-07-29 17:24:49
+ * @LastEditTime: 2020-07-30 21:27:02
  * @Description: 
  */ 
 
@@ -17,23 +17,34 @@ module.exports = (parent, param) => {
         let dep = fse.readJSONSync(jsonFile);
         if (!param.options.length & !param.args.length) {
             // install all
-            let count = 0, installRes, installAllInfo = {};
+            let count = 0,errCount = 0, installRes, installAllInfo = {};
             for (let key in dep.devDependencies) {
                 installRes = await doInstall(key, dep.devDependencies[key], '-D', {writeJson: false})
                 if (installRes.finish) {
                     count++;
+                } else {
+                    errCount++;
                 }
             }
             logger.succeed(`${count} devDependencies installed !`);
+            if (errCount > 0) {
+                logger.error(`${errCount} devDependencies install failed !!!`)
+            }
             installAllInfo.devDependencies = count
             count = 0;
+            errCount = 0;
             for (let key in dep.dependencies) {
                 installRes = await doInstall(key, dep.dependencies[key], '-S', {writeJson: false})
                 if (installRes.finish) {
                     count++;
+                } else {
+                    errCount++;
                 }
             }
             logger.succeed(`${count} dependencies installed !`);
+            if (errCount > 0) {
+                logger.error(`${errCount} dependencies install failed !!!`)
+            }
             installAllInfo.dependencies = count;
             resolve(installAllInfo)
         } else {

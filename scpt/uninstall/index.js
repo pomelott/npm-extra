@@ -2,7 +2,7 @@
  * @Author: Tate
  * @Date: 2020-03-29 16:25:21
  * @LastEditors: Tate
- * @LastEditTime: 2020-07-29 18:18:03
+ * @LastEditTime: 2020-07-30 21:25:19
  * @Description: 
  */ 
 
@@ -20,24 +20,35 @@ module.exports = (parent, param) => {
             // uninstall all
             logger.notice(`after 3s to uninstall all package!`)
             await sleep(3000)
-            let count = 0, uninstallRes;
+            let count = 0,errCount = 0, uninstallRes;
             // 此处倒序遍历是为了先卸载非依赖项
             for (let key of Object.keys(dep.devDependencies).reverse()) {
                 uninstallRes = await doUninstall(key)
                 if (uninstallRes.finish) {
                     count++;
+                } else {
+                    errCount++;
                 }
             }
             logger.succeed(`${count} devDependencies uninstalled !`);
+            if (errCount > 0) {
+                logger.error(`${errCount} devDependencies uninstall failed !!!`)
+            }
             uninstallAllInfo.devDependencies = count;
             count = 0;
+            errCount = 0;
             for (let key of Object.keys(dep.dependencies).reverse()) {
                 uninstallRes = await doUninstall(key);
                 if (uninstallRes.finish) {
                     count++;
+                } else {
+                    errCount++;
                 }
             }
-            logger.finish(`${count} dependencies uninstalled !`);
+            logger.succeed(`${count} dependencies uninstalled !`);
+            if (errCount > 0) {
+                logger.error(`${errCount} dependencies uninstall failed !!!`)
+            }
             uninstallAllInfo.dependencies = count;
             resolve(uninstallAllInfo)
         } else {
