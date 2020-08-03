@@ -2,12 +2,13 @@
  * @Author: Tate
  * @Date: 2020-03-28 21:00:49
  * @LastEditors: Tate
- * @LastEditTime: 2020-07-29 17:39:34
+ * @LastEditTime: 2020-08-03 21:48:12
  * @Description: 
  */ 
 const path = require('path');
 const {appendJson} = require('../../static');
 const {logger} = require('../../lib/log');
+const { checkConfig } = require('../../static/confHandler');
 const mapConf = {
     '-b': 'baseSys',
     '--base-sys': 'baseSys',
@@ -21,11 +22,20 @@ module.exports = (self, param) => {
     } else {
         let confObj = {};
         param.options.forEach((item, index) => {
-            let key = mapConf[item];
-            confObj[key] = param.args[index];
+            let key = mapConf[item],
+                conf = {};
+            conf[key] = param.args
+            if (!checkConfig(conf)) {
+                logger.error(`config ${key} failed, baseSys can't be ${param.args[index]}, for more info ,view https://github.com/pomelott/npm-extra !`) 
+                process.exit(1);
+            } else {
+                confObj[key] = param.args[index];
+            }
         })
         appendJson(path.resolve(__dirname, '../../static/conf.json'), confObj);
-        logger.succeed(`config success !`)
+        for (let key in confObj) {
+            logger.succeed(`config ${key} to ${confObj[key]} success !`)
+        }
         return self;
     }
     

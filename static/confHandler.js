@@ -2,15 +2,35 @@ const fse = require('fs-extra');
 const fs = require('fs');
 const path = require('path');
 const jsonDir = path.resolve(__dirname, './conf.json')
-const {appendJson, writeJson} = require('pomelo-toolbox').json
-
+const {appendJson, writeJson} = require('pomelo-toolbox').json;
+const _ = require('lodash')
+const checkJson = {
+    baseSys: ['yarn', 'npm']
+}
 module.exports.getConf = (key) => {
     if (!key) {
         return fse.readJSONSync(jsonDir)
     }
     return fse.readJSONSync(jsonDir)[key]
 }
-
+module.exports.checkConfig = (obj = {}) => {
+    for (let key in obj) {
+        let item = obj[key];
+        if (_.isArray(obj[key])) {
+            for (let i = 0; i < item.length; i++) {
+                if (!checkJson[key]) {
+                    return true;
+                }
+                if (checkJson[key].indexOf(item[i]) === -1) {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+    return true;
+}
 module.exports.setConf = (obj) => {
     let json = fse.readJSONSync(jsonDir);
     for (let key in obj) {

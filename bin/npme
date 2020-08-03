@@ -40,6 +40,6 @@ program
   .action(function (cmdObj) {
     const finalParam = classifyCmd(cmdObj);
     pkg.config(finalParam);
-  })
+})
 
 program.parse(process.argv);

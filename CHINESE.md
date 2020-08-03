@@ -75,7 +75,7 @@ npme init
      npme un --no-save vue
  ```
 ### 配置
-* 配置基础命令，默认为yarn
+* 配置基础命令，默认为yarn(当前支持npm与yarn)
 
 ```
     npme config -b yarn
@@ -86,4 +86,8 @@ npme init
 ```
     npme config -f package-extra.json
     npme config --file package-extra.json
+```
+* 根据当前的执行路径解析带有相对路径的json文件名，并初始化文件。
+```
+    npme config -f ./src/package-extra.json
 ```

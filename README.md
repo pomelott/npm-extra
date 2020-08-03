@@ -74,7 +74,7 @@ notice: this has the same param as npm
      npme un --no-save vue
  ```
 ### Config
-* confg base cmd, has been set to yarn by default.
+* confg base cmd, has been set to yarn by default(now supports npm and yarn).
 
 ```
     npme config -b yarn
@@ -85,4 +85,8 @@ notice: this has the same param as npm
 ```
     npme config -f package-extra.json
     npme config --file package-extra.json
+```
+* init json file according to a relative path resolved with the execicute path.
+```
+    npme config -f ./src/package-extra.json
 ```
