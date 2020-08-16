@@ -1,5 +1,5 @@
 # npm-extra-extension
-* [🇨🇳中文文档 | 中国雄起](https://github.com/pomelott/npm-extra/blob/master/CHINESE.md)
+* [🇨🇳中文文档](https://github.com/pomelott/npm-extra/blob/master/CHINESE.md)
 * npm-extra-extension is used to generate additional dependency information files. It is very convenient to split business dependencies in front-end engineering.
 * Continue to increase and expand, please give star ☆ and encourage.
 
