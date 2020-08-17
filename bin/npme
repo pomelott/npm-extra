@@ -37,6 +37,7 @@ program
   .description('Configuration command')
   .option('-f, --filename', 'Modify the initialization file filename')
   .option('-b, --base-sys', 'Modify basic commands')
+  .option('-l, --list', 'show config list')
   .action(function (cmdObj) {
     const finalParam = classifyCmd(cmdObj);
     pkg.config(finalParam);

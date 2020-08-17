@@ -1,6 +1,6 @@
 {
   "name": "npm-extra-extension",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Npm's useful function extension.",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,6 @@
   "dependencies": {
     "commander": "^6.0.0",
     "fs-extra": "^9.0.0",
-    "lodash": "^4.17.19",
     "pomelo-toolbox": "^1.2.2"
   },
   "repository": {

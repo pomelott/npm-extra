@@ -24,7 +24,7 @@ module.exports = (self, param) => {
         param.options.forEach((item, index) => {
             let key = mapConf[item],
                 conf = {};
-            conf[key] = param.args
+            conf[key] = param.args[index]
             if (!checkConfig(conf)) {
                 logger.error(`config ${key} failed, baseSys can't be ${param.args[index]}, for more info ,view https://github.com/pomelott/npm-extra !`) 
                 process.exit(1);

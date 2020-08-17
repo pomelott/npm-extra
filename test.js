@@ -8,10 +8,10 @@
 
 (async function () {
     const {exec} = require('child_process')
-    const cwd = '/Users/tate/ek_fe/git/student/';
+    const cwd = '/Users/tate/Documents/work/pomeloGithub/npm-extra';
     // 命令执行
-    exec('npme init', (error, stdout, stderr) => {
-        exec('npme install --save-dev chalk lodash@2.0.0', {cwd}, (error, stdout, stderr) => {
+    // exec('npme init', (error, stdout, stderr) => {
+        exec('npme config --list', {cwd}, (error, stdout, stderr) => {
             console.log('---------- error ----------')
             console.log(error)
             console.log('---------- stdout ----------')
@@ -19,5 +19,5 @@
             console.log('---------- stderr ----------')
             console.log(stderr)
         })
-    })
+    // })
 })()
